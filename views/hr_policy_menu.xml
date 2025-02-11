@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <menuitem id="hr_policy_root_menu"
-              name="Policies"
+              name="HR Policy"
               web_icon="hr_policy,static/description/icon.png"/>
     <menuitem id="policy_menu"
               name="Policy"
