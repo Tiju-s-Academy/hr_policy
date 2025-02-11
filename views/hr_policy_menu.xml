@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="hr_policy_root_menu"
+              name="Policies"
+              web_icon="hr_policy,static/description/icon.png"/>
+    <menuitem id="policy_menu"
+              name="Policy"
+              parent="hr_policy_root_menu"
+              action="action_hr_policy"/>
+    <menuitem id="policy_tag_menu"
+              name="Tag"
+              action="action_policy_tags"
+              parent="hr_policy_root_menu"/>
+</odoo>

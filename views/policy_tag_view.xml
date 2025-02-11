@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <record id="view_policy_tags_tree" model="ir.ui.view">
+    <field name="name">policy.tags.tree</field>
+    <field name="model">policy.tags</field>
+    <field name="arch" type="xml">
+        <tree editable="bottom">
+            <field name="name"/>
+            <field name="color" widget="color_picker"/>
+        </tree>
+    </field>
+</record>
+
+<record id="action_policy_tags" model="ir.actions.act_window">
+    <field name="name">Policy Tags</field>
+    <field name="res_model">policy.tags</field>
+    <field name="view_mode">tree</field>
+</record>
+</odoo>

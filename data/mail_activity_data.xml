@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mail_activity_hr_policy" model="mail.activity.type">
+        <field name="name">HR Policy</field>
+         <field name="summary">Policy Follow-up</field>
+        <field name="res_model">hr.policy</field>
+        <field name="delay_count">30</field>
+    </record>
+</odoo>
+

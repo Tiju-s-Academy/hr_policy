@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hr_policy_tree_view" model="ir.ui.view">
+        <field name="name">hr.policy.tree.view</field>
+        <field name="model">hr.policy</field>
+        <field name="arch" type="xml">
+            <tree string="Hr Policy">
+                <field name="responsible_id"/>
+                <field name="tag_ids"/>
+                <field name="title"/>
+                <field name="date"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'"
+                       decoration-success="state == 'published'"/>
+            </tree>
+        </field>
+    </record>
+    <record id="hr_policy_form_view" model="ir.ui.view">
+        <field name="name">hr.policy.form.view</field>
+        <field name="model">hr.policy</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="state" invisible="1"/>
+                <field name="has_seen" invisible="1"/>
+                <header>
+                    <button name="action_publish" string="Publish" type="object" class="btn btn-success"
+                            invisible="state != 'draft'" groups="hr.group_hr_manager"/>
+                    <button name="action_seen" string="Mark As Seen" type="object"
+                            class="btn btn-info" invisible="not attachment or has_seen or state != 'published'"/>
+                    <button name="action_update_policy" string="Update Policy" type="object"
+                             invisible="state != 'published'" groups="hr.group_hr_manager"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Published" bg_color="text-bg-success"
+                            invisible="state != 'published'"/>
+                    <group>
+                        <group>
+                            <field name="responsible_id"  readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"
+                                   readonly="state !='draft'"/>
+                            <field name="date" readonly="1"/>
+                            <field name="type_of_file" widget="radio" options="{'horizontal': true}"
+                                   readonly="state !='draft'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page name="Attachment" invisible="type_of_file != 'pdf'">
+                            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                                <!-- PDF Viewer Section -->
+                                <div style="flex: 3;">
+                                    <center>
+                                        <separator string="Policy Details" colspan="2"/>
+                                    <div class="oe_title">
+                                        <h1>
+                                            <field class="text-break" options="{'line_breaks': False}" widget="text"
+                                                   name="title" placeholder="e.g. Discipline"/>
+                                        </h1>
+                                    </div>
+                                        <separator colspan="2"/>
+                                    </center>
+                                    <field name="attachment" widget="pdf_viewer" colspan="2" nolabel="1"
+                                           readonly="state != 'draft'" required="1"/>
+
+                                </div>
+
+                                <!-- Seen By Section -->
+                                <div style="flex: 1; min-width: 200px; margin-top: 17px; padding: 5px; overflow: hidden; white-space: nowrap; background-color: #f0f0f0;">
+                                    <field name="seen_by_data" options="{'no_open': True}" readonly="1">
+                                        <tree>
+                                            <field name="employee_id" widget="many2many_avatar" string="Seen By"
+                                                   options="{'no_open': True}" readonly="1"/>
+                                            <field name="seen_time" string="Seen At" options="{'no_open': True}"
+                                                   readonly="1"/>
+                                        </tree>
+                                    </field>
+                                </div>
+                            </div>
+                            <separator colspan="2"/>
+                        </page>
+
+                        <page name="Body" invisible="type_of_file != 'write'">
+                            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                                <!-- Summary Section -->
+                                <div style="flex: 3;">
+                                    <field name="summary" colspan="2" nolabel="1" readonly="state != 'draft'"/>
+                                </div>
+
+                                <!-- Seen By Section -->
+                                <div style="flex: 1; min-width: 200px; margin-top: 10px; padding: 5px; overflow: hidden; white-space: nowrap;">
+                                    <field name="seen_by_data" options="{'no_open': True}" readonly="1">
+                                        <tree>
+                                            <field name="employee_id" widget="many2many_avatar" string="Seen By"
+                                                   options="{'no_open': True}" readonly="1"/>
+                                            <field name="seen_time" string="Seen At" options="{'no_open': True}"
+                                                   readonly="1"/>
+                                        </tree>
+                                    </field>
+                                </div>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_policy" model="ir.actions.act_window">
+        <field name="name">HR Policy</field>
+        <field name="res_model">hr.policy</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+
