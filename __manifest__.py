@@ -18,6 +18,6 @@
         'views/hr_policy_menu.xml',
     ],
     'license': 'LGPL-3',
-    'application': False,
+    'application': True,
 
 }

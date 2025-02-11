@@ -13,7 +13,7 @@ class HrPolicy(models.Model):
     title = fields.Char(string='Title')
     attachment = fields.Binary()
     summary = fields.Html()
-    date = fields.Datetime(string='Published On')
+    date = fields.Datetime(string='Published On | Updated On')
     state = fields.Selection([('draft', 'Draft'), ('published', 'Published')], string='Status', tracking=True,
                              default='draft')
     seen_by_data = fields.One2many('hr.policy.seen', 'policy_id', string="Seen By")

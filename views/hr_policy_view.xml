@@ -27,7 +27,8 @@
                     <button name="action_seen" string="Mark As Seen" type="object"
                             class="btn btn-info" invisible="not attachment or has_seen or state != 'published'"/>
                     <button name="action_update_policy" string="Update Policy" type="object"
-                             invisible="state != 'published'" groups="hr.group_hr_manager"/>
+                             invisible="state != 'published'" groups="hr.group_hr_manager"
+                             confirm="Are you sure you want to update the policy? This will reset seen employees and activities."/>
                 </header>
                 <sheet>
                     <widget name="web_ribbon" title="Published" bg_color="text-bg-success"
