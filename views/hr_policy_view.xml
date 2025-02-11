@@ -24,7 +24,7 @@
                 <header>
                     <button name="action_publish" string="Publish" type="object" class="btn btn-success"
                             invisible="state != 'draft'" groups="hr.group_hr_manager"/>
-                    <button name="action_seen" string="Mark As Seen" type="object"
+                    <button name="action_seen" string="Acknowledge" type="object"
                             class="btn btn-info" invisible="not attachment or has_seen or state != 'published'"/>
                     <button name="action_update_policy" string="Update Policy" type="object"
                              invisible="state != 'published'" groups="hr.group_hr_manager"
